@@ -1,0 +1,35 @@
+FROM ubuntu:jammy
+
+ARG TARGETPLATFORM="linux/arm64/v8"
+ARG VERSION
+ARG BRANCH="master"
+RUN echo "TARGETPLATFORM : $TARGETPLATFORM"
+
+COPY build-script.sh /tmp/
+
+RUN apt-get install -y curl git \
+  && rm -rf /var/lib/apt/lists/* \
+  && mkdir /config build/ \
+  && cd /config \
+  && cp /tmp/build-script.sh /config \
+  && if [ "$TARGETPLATFORM" = "linux/386" ] ; then XARCH="" ; fi \
+  && if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then XARCH="-x64" ; bash script-build.sh $XARCH ; fi \
+  && if [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; then XARCH="-ahf" ; fi \
+  && if [ "$TARGETPLATFORM" = "linux/arm64/v8" ] ; then XARCH="-aarch64" ; fi \
+
+
+#x86      https://otgw.tclcode.com/download/otmonitor
+#x86-64   https://otgw.tclcode.com/download/otmonitor-x64
+#armhf    https://otgw.tclcode.com/download/otmonitor-ahf
+#aarch64  https://otgw.tclcode.com/download/otmonitor-aarch64
+
+# COPY  /tmp/
+
+#RUN mkdir /config build/ \
+#  && cd /config \
+#  && cp /tmp/build-script.sh /config \
+#  && if [ "$TARGETPLATFORM" = "linux/386" ] ; then XARCH="" ; fi \
+#  && if [ "$TARGETPLATFORM" = "linux/amd64" ] ; then XARCH="-x64" ; bash script-build.sh $XARCH ; fi \
+#  && if [ "$TARGETPLATFORM" = "linux/arm/v7" ] ; then XARCH="-ahf" ; fi \
+#  && if [ "$TARGETPLATFORM" = "linux/arm64/v8" ] ; then XARCH="-aarch64" ; fi \
+
