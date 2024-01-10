@@ -4,7 +4,7 @@ DOCKER_REPO="mc303/otgw"
 DOCKER_FILE="Dockerfile.aarch64"
 BUIILDX_REPO='buildotmonitor'
 BUILD_PLATFORM="linux/arm64"
-OTGW_VERSION="v6.1"
+OTGW_VERSION="v6.5"
 
 # BUILD_PLATFORM="linux/386,linux/amd64,linux/arm/v7,linux/arm64/v8"
 

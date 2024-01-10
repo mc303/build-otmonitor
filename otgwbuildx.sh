@@ -1,9 +1,9 @@
 #!/bin/sh
 
-DOCKER_REPO="mc303/otmonitor:v6.1"
+DOCKER_REPO="mc303/otmonitor:v6.5"
 DOCKER_FILE="Dockerfile.otgw"
-BUIILDX_REPO='buildotgw'
-BUILD_PLATFORM="linux/386,linux/amd64,linux/arm/v7,linux/arm64"
+BUIILDX_REPO='build-otgw'
+BUILD_PLATFORM="linux/amd64,linux/arm64"
 
 docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
 
