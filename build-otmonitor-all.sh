@@ -5,7 +5,10 @@ DOWNLOADURL='https://otgw.tclcode.com/download'
 
 git clone https://github.com/hvxl/otmonitor.git
 cd otmonitor
-git checkout tags/${VERSION}
+if [ ${VERSION} == "latest" ]; 
+then
+	git checkout tags/${VERSION};
+fi
 
 curl ${DOWNLOADURL}/sdx-20110317.kit --output sdx.kit
 # curl https://otgw.tclcode.com/download/tclkit${PLATFORM}  --output tclkit${PLATFORM}

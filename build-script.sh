@@ -4,7 +4,10 @@ VERSION=$2
 
 git clone https://github.com/hvxl/otmonitor.git
 cd otmonitor
-git checkout tags/$VERSION
+if [ ${VERSION} == "latest" ]
+then
+    git checkout tags/$VERSION
+fi
 
 curl https://otgw.tclcode.com/download/sdx-20110317.kit --output sdx.kit
 curl https://otgw.tclcode.com/download/tclkit$1 --output tclkit$1

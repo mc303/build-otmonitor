@@ -1,6 +1,7 @@
 #!/bin/sh
 
-DOCKER_REPO="mc303/otmonitor:v6.5"
+DOCKER_TAG=$1
+DOCKER_REPO="mc303/otmonitor:${DOCKER_TAG}"
 DOCKER_FILE="Dockerfile.otgw"
 BUIILDX_REPO='build-otgw'
 BUILD_PLATFORM="linux/amd64,linux/arm64"
@@ -15,4 +16,4 @@ docker buildx use ${BUIILDX_REPO}
 docker buildx build --platform=${BUILD_PLATFORM} -f ${DOCKER_FILE} -t ${DOCKER_REPO} --push .
 
 #remove multiplatform environment
-docker buildx rm ${BUIILDX_REPO}
+docker buildx rm ${BUIILDX_REPO
