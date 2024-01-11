@@ -4,8 +4,8 @@ VERSION=$2
 
 git clone https://github.com/hvxl/otmonitor.git
 cd otmonitor
-if [ ${VERSION} == "latest" ]
-then
+
+if [[ ${VERSION} != "latest" ]]; then
     git checkout tags/$VERSION
 fi
 

@@ -3,7 +3,7 @@ FROM debian:bullseye as debian
 ARG TARGETPLATFORM
 ARG XARCH
 ARG VERSION
-ARG BSCRIPT="build-script.sh"
+ARG BSCRIPT="build-otmonitor-all.sh"
 RUN echo "TARGETPLATFORM : $TARGETPLATFORM"
 
 COPY $BSCRIPT /tmp/
@@ -20,10 +20,12 @@ RUN apt update \
   && echo /tmp/$BSCRIPT \
   && cp /tmp/$BSCRIPT /build \
   && echo $TARGETPLATFORM \ 
-  && bash $BSCRIPT -x64 $VERSION
+  && bash $BSCRIPT $VERSION
 
 FROM scratch as custom-exporter
+COPY --from=debian /data/otmonitor-ahf .
 COPY --from=debian /data/otmonitor-x64 .
+COPY --from=debian /data/otmonitor-aarch64 .
 
 #   && bash $BSCRIPT -x64 $VERSION $BRANCH
 
@@ -32,4 +34,3 @@ COPY --from=debian /data/otmonitor-x64 .
 #x86-64   https://otgw.tclcode.com/download/otmonitor-x64
 #armhf    https://otgw.tclcode.com/download/otmonitor-ahf
 #aarch64  https://otgw.tclcode.com/download/otmonitor-aarch64
-
